@@ -3,13 +3,13 @@
 
 stdenv.mkDerivation rec {
   pname = "mergerfs-tools";
-  version = "20190411";
+  version = "20200911";
 
   src = fetchFromGitHub {
     owner = "trapexit";
     repo = pname;
-    rev = "6e41fc5848c7cc4408caea86f3991c8cc2ac85a1";
-    sha256 = "0izswg6bya13scvb37l3gkl7mvi8q7l11p4hp4phdlcwh9jvdzcj";
+    rev = "480296ed03d1c3c7909697d7ef96d35840ee26b8";
+    sha256 = "0xr06gi4xcr832rzy0hkp5c1n231s7w5iq1nkjvx9kvm0dl7chpq";
   };
 
   nativeBuildInputs = [ makeWrapper ];
@@ -22,6 +22,7 @@ stdenv.mkDerivation rec {
 
   postInstall = with stdenv.lib; ''
     wrapProgram $out/bin/mergerfs.balance --prefix PATH : ${makeBinPath [ rsync ]}
+    wrapProgram $out/bin/mergerfs.consolidate --prefix PATH : ${makeBinPath [ rsync ]}
     wrapProgram $out/bin/mergerfs.dup --prefix PATH : ${makeBinPath [ rsync ]}
     wrapProgram $out/bin/mergerfs.mktrash --prefix PATH : ${makeBinPath [ pythonPackages.xattr ]}
   '';
@@ -31,6 +32,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/trapexit/mergerfs-tools";
     license = licenses.isc;
     platforms = platforms.linux;
-    maintainers = with maintainers; [ jfrankenau ];
+    maintainers = with maintainers; [ jfrankenau presto8 ];
   };
 }
