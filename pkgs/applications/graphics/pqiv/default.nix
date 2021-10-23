@@ -1,5 +1,5 @@
 { lib, stdenv, fetchFromGitHub, pkg-config
-, ffmpeg, gtk3, imagemagick, libarchive, libspectre, libwebp, poppler
+, ffmpeg, gtk3, imagemagick, libarchive, libspectre, libwebp, poppler, makeDesktopItem
 }:
 
 stdenv.mkDerivation (rec {
@@ -25,4 +25,17 @@ stdenv.mkDerivation (rec {
     maintainers = [];
     platforms = platforms.linux;
   };
+
+  desktopItems = [
+    (makeDesktopItem {
+      name = pname;
+      desktopName = "pqiv";
+      genericName = "Image viewer";
+      comment = "Command-line image virewer with a minimal UI";
+      exec = "pqiv";
+      mimeType = "image/jpeg;image/png";
+      categories = "Graphics;";
+    })
+  ];
+
 })
