@@ -11,6 +11,13 @@ let cfg = config.services.victoriametrics; in
         The VictoriaMetrics distribution to use.
       '';
     };
+    storageDataPath = mkOption {
+      default = "/var/lib/victoriametrics";
+      type = types.str;
+      description = lib.mdDoc ''
+        Path to storage data.
+      '';
+    };
     listenAddress = mkOption {
       default = ":8428";
       type = types.str;
@@ -48,7 +55,7 @@ let cfg = config.services.victoriametrics; in
         DynamicUser = true;
         ExecStart = ''
           ${cfg.package}/bin/victoria-metrics \
-              -storageDataPath=/var/lib/victoriametrics \
+              -storageDataPath ${lib.escapeShellArg cfg.storageDataPath} \
               -httpListenAddr ${cfg.listenAddress} \
               -retentionPeriod ${toString cfg.retentionPeriod} \
               ${lib.escapeShellArgs cfg.extraOptions}
