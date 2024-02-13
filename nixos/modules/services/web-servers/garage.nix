@@ -91,6 +91,7 @@ in
         ProtectHome = true;
         NoNewPrivileges = true;
         EnvironmentFile = lib.optional (cfg.environmentFile != null) cfg.environmentFile;
+        ReadWritePaths = [ cfg.settings.metadata_dir cfg.settings.data_dir ];
       };
       environment = {
         RUST_LOG = lib.mkDefault "garage=${cfg.logLevel}";
