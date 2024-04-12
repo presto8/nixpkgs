@@ -23,7 +23,11 @@ in {
       description = "greenclip daemon";
       wantedBy = [ "graphical-session.target" ];
       after    = [ "graphical-session.target" ];
-      serviceConfig.ExecStart = "${cfg.package}/bin/greenclip daemon";
+      serviceConfig = {
+        ExecStart = "${cfg.package}/bin/greenclip daemon";
+        OOMScoreAdjust = "-999";
+        Restart = "always";
+      };
     };
 
     environment.systemPackages = [ cfg.package ];
