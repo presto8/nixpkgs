@@ -152,7 +152,8 @@ in
           # Acquire DHCP leases.
           for iface in ${dhcpIfShellExpr}; do
             echo "acquiring IP address via DHCP on $iface..."
-            udhcpc --quit --now -i $iface -O staticroutes --script ${udhcpcScript} ${udhcpcArgs}
+            # run DHCP in the background until it acquires an address
+            udhcpc --quit -i $iface -O staticroutes --script ${udhcpcScript} ${udhcpcArgs} &
           done
         ''
 
@@ -166,6 +167,10 @@ in
           for iface in $ifaces; do
             ip address flush dev "$iface"
             ip link set dev "$iface" down
+          done
+          # Stop any running udhcpc
+          for iface in ${dhcpIfShellExpr}; do
+            pkill -f "udhcpc.*$iface"
           done
         '';
 
