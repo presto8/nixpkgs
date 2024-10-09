@@ -13487,6 +13487,8 @@ self: super: with self; {
 
   rstr = callPackage ../development/python-modules/rstr { };
 
+  rsyncfilter = callPackage ../development/python-modules/rsyncfilter { };
+
   rtmidi-python = callPackage ../development/python-modules/rtmidi-python {
     inherit (pkgs.darwin.apple_sdk.frameworks) CoreAudio CoreMIDI CoreServices;
   };
