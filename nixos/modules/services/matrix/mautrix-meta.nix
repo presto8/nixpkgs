@@ -445,7 +445,7 @@ in
               # in this case read from EnvironmentFile
               rm -f '${settingsFile cfg}'
               old_umask=$(umask)
-              umask 0177
+              umask 0117
               envsubst \
                 -o '${settingsFile cfg}' \
                 -i '${settingsFileUnsubstituted cfg}'
