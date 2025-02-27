@@ -11523,6 +11523,8 @@ self: super: with self; {
 
   pyerfa = callPackage ../development/python-modules/pyerfa { };
 
+  pyetrade = callPackage ../development/python-modules/pyetrade { };
+
   pyevmasm = callPackage ../development/python-modules/pyevmasm { };
 
   pyevilgenius = callPackage ../development/python-modules/pyevilgenius { };
