@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -Eeu -o pipefail
+
+die_if_dirty() {
+    git_status=$(git status -s)
+    if [[ $git_status ]]; then
+        die "commit or stash files before switch\n$git_status"
+    fi
+}
+
+die() { echo -e "!! $*"; exit 1; }
+
+upstream=nixos-25.11
+
+die_if_dirty
+git checkout $upstream
+git pull
+git rebase $upstream my-$upstream
