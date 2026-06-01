@@ -240,6 +240,7 @@ in
       };
     };
     redis = {
+      package = lib.mkPackageOption pkgs "redis" { };
       enable = mkEnableOption "a redis cache for use with immich" // {
         default = true;
       };
