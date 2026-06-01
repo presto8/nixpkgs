@@ -3,8 +3,6 @@
 [Immich](https://immich.app/) is a self-hosted photo and video management
 solution, similar to SaaS offerings like Google Photos.
 
-## Migrating from `pgvecto-rs` to VectorChord (pre-25.11 installations) {#module-services-immich-vectorchord-migration}
-
 Immich instances that were setup before 25.11 (as in
 `system.stateVersion = 25.11;`) will be automatically migrated to VectorChord.
 Note that this migration is not reversible, so database dumps should be created
